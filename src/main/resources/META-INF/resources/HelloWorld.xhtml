@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>第一个JSF+SpringBoot项目</title>
+</h:head>
+
+<h:body>
+    <h:form id="helloworld-form">
+
+        <p:panel header="新增用户">
+            <h:panelGrid columns="2" cellpadding="4">
+                <h:outputText value="姓名 ：" />
+                <p:inputText id="name" value="#{user.name}" required="true" />
+
+                <h:outputText value="住址 ：" />
+                <p:inputText id="address" value="#{user.address}" required="true"/>
+
+                <h:outputText value="年龄 ：" />
+                <p:inputText id="age" value="#{user.age}" required="true" >
+                    <f:validateLength maximum="3" />
+                    <p:ajax update="agemsg" event="blur"/>
+                    <p:message id="agemsg" for="age"/>
+                </p:inputText>
+
+                <h:outputText value="工作 ：" />
+                <p:inputText id="work" value="#{user.work}" >
+                    <f:validateLength minimum="1"/>
+                    <p:ajax update="workmsg" event="blur"/>
+                    <p:message id="workmsg" for="work"/>
+                </p:inputText>
+
+                <p:commandButton value="确定新增" actionListener="#{helloWorld.save}"/>
+              <!--  <p:commandButton id="submit" value="新增"
+                                 update="greeting-panel"
+                                 oncomplete="PF('greetingDialog').show()" />-->
+            </h:panelGrid>
+        </p:panel>
+    </h:form>
+    <p:button value="点击跳转测试" href="/test.xhtml" />
+
+
+
+<!--    <p:commandButton value="新建" icon="fa fa-plus"
+                     actionListener="#{situationModelView.showCreateModal}">
+        <p:ajax event="dialogReturn"
+                listener="#{situationListView.onDialogReturn}"
+                update=":form:situation-section"/>
+    </p:commandButton>-->
+
+
+    <!-- <p:dataTable id="situation-table" var="s"
+                  value="#{situationListView.situations}"
+                  paginatorPosition="bottom"
+                  selectionMode="single" reflow="true"
+                  selection="#{situationListView.selected}"
+                  rowKey="#{s.id}" paginator="true" rows="10">
+
+         <p:ajax event="rowSelect"
+                 listener="#{situationListView.onRowSelect}"
+                 update=":form:situation-section"/>
+
+         <p:column headerText="代码" sortBy="#{s.code}">
+             <h:outputText value="#{s.code}"/>
+         </p:column>
+
+         <p:column headerText="名称" sortBy="#{s.name}">
+             <h:outputText value="#{s.name}"/>
+         </p:column>
+
+         <p:column headerText="机构" sortBy="#{s.organization.name}">
+             <h:outputText value="#{s.organization.name}"/>
+         </p:column>
+
+
+     </p:dataTable>-->
+</h:body>
+</html>
